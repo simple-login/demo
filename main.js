@@ -26,7 +26,7 @@ OIDC.setProviderInfo(providerInfo);
 // OAuth2 client info. Please replace "client-id" here by your SimpleLogin OAuth2 client-id
 const clientInfo = {
   client_id: 'client-id',
-  redirect_uri: 'https://12c7e730.ngrok.io' // todo
+  redirect_uri: 'https://demosl.now.sh'
 };
 OIDC.storeInfo(providerInfo, clientInfo);
 
