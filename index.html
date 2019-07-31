@@ -44,9 +44,17 @@
 
     <div class="row">
       <div class="col text-center" style="width: 500px;">
-        <button class="btn btn-social btn-primary">
+        <button class="btn btn-social btn-primary" onclick="simpleLogin()">
           <i class="flaticon-021-shield-7"></i> Connect with SimpleLogin
         </button>
+
+        <div v-if="sl_login">
+          <p class="text-success">Successful login! </p>
+          <p>Below is the information this website receives from SimpleLogin:</p>
+          Email: {{sl_user.email}} <br>
+          Name: {{sl_user.name}} <br>
+          Avatar: <img :src=sl_user.avatar_url>
+        </div>
 
       </div>
 
