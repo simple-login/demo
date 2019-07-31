@@ -1,4 +1,4 @@
-This is an example of a typical website that implements SimpleLogin. 
+This is an example of a typical website that implements SimpleLogin. The code is deployed on http://demosl.now.sh
 
 Upon successful login, you will see the information that the website receives 
 when you sign in with SimpleLogin.
@@ -17,15 +17,18 @@ This website can be served via any static server, for example with `http.server`
 
 It works immediately with SimpleLogin as SimpleLogin whitelists localhost to facilitate development.
 
-For Facebook, unfortunately you would need to:
+For Facebook, unfortunately you would need to find a way to run a https server as Facebook SDK does not allow plain http on local:
 
-1. create a Facebook app on https://developers.facebook.com
-2. replace the facebook app id used in `index.html` by this appId 
+* create a Facebook app on https://developers.facebook.com
 
-```<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=410139219846977&autoLogAppEvents=1"></script>```
+* replace the facebook app id used in `index.html` by this appId 
 
-3. run a https server, add this domain to facebook.  
+```html
+<script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=410139219846977&autoLogAppEvents=1"></script>  
+```    
+
+* run a https server and serve the code through this server. We recommend [ngrok](http://ngrok.com) as a quick way to run a http server.  
 
 These steps are required because Facebook SDK does not allow http://localhost by default.
 
