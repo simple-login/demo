@@ -76,11 +76,11 @@
   </div>
 
   <div class="text-center">
-    <div v-if="!fb_login">
+    <div v-if="!fb_login && !sl_login">
       <img src="not-login.png" style="max-width: 400px; margin-top: 100px">
     </div>
 
-    <div v-if="fb_login">
+    <div v-if="fb_login || sl_login" style="margin-top: 100px">
       <h4 class="text-success">Congratulations! You now have access to this super secret information!</h4>
       <img src="login.png" style="max-width: 400px; margin-top: 100px">
     </div>
