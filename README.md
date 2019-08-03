@@ -1,4 +1,8 @@
-This is an example of a typical website that implements SimpleLogin. The code is deployed on http://demosl.now.sh
+This is an example of a typical website that implements SimpleLogin. 
+The code is deployed on https://simple-login-simplelogin-demo.glitch.me
+
+Feel free to **remix** it 
+on https://glitch.com/~simple-login-simplelogin-demo ✌️
 
 Upon successful login, you will see the information that the website receives 
 when you sign in with SimpleLogin.
