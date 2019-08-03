@@ -15,10 +15,6 @@ This project depends on:
 - Bootstrap 4
 - VueJS
 
-This website can be served via any static server, for example with `http.server` python module:
-
-> python3 -m http.server
-
 It works immediately with SimpleLogin as SimpleLogin whitelists localhost to facilitate development.
 
 For Facebook, unfortunately you would need to find a way to run a https server as Facebook SDK does not allow plain http on local:
