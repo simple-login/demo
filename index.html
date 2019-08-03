@@ -28,11 +28,13 @@
     <div class="card p-5">
       <div class="row">
         <div class="col-md-8 mx-auto social-container my-2 order-md-1">
-          <button class="btn btn-social btn-primary mb-2" onclick="simpleLogin()">
-            <i class="flaticon-021-shield-7"></i> Connect with SimpleLogin
+          <button class="btn btn-social btn-primary mb-4 mx-auto" 
+                  style="width:300px"
+                  onclick="simpleLogin()">
+            <i class="flaticon-021-shield-7"></i> Login with SimpleLogin
           </button>
 
-          <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
+          <div class="fb-login-button mx-auto" data-width="300px" data-size="large" data-button-type="continue_with"
                data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email"
                onlogin="checkLoginState();">
           </div>
