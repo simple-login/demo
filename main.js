@@ -70,6 +70,7 @@ function simpleLogin() {
 
 /*** END SimpleLogin ***/
 
+/*** Facebook ***/
 function getFBUserData() {
   FB.api('/me?fields=id,name,email,picture{url}', function (response) {
     // response has this form {"id":"1234","name":"First Last","email":"abcd@gmail.com","picture":{"data":{"url":"https://avatar.png"}}}
@@ -84,11 +85,12 @@ function getFBUserData() {
   });
 }
 
-/*** Facebook ***/
-function checkLoginState() {
-  FB.getLoginStatus(function () {
-    getFBUserData();
+function fbLogin() {
+  FB.login(function (response) {
+    if (response.status === 'connected')
+      getFBUserData();
   });
+
 }
 
 FB.getLoginStatus(function (response) {

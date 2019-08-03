@@ -8,12 +8,13 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .container-fluid > div {
     width: 85%;
     min-width: 300px;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .card {
