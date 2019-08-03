@@ -22,69 +22,57 @@
 </head>
 
 <body>
-<div class="container" id="app">
-  <div class="text-center">
-    <h3 style="margin-top: 30px">A typical website that has SimpleLogin integrated.</h3>
-    <p>
-      Upon successful login, you will see the information
-      that the website receives when you sign in with SimpleLogin.
+<div class="container-fluid" id="app">
+  <div v-if="!authenticated">
+    <h1 class="text-white text-center">Sign in</h1>
+    <div class="card p-5">
+      <div class="row">
+        <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+          <button class="btn btn-social btn-primary mb-2" onclick="simpleLogin()">
+            <i class="flaticon-021-shield-7"></i> Connect with SimpleLogin
+          </button>
+
+          <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
+               data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email"
+               onlogin="checkLoginState();">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bg-warning text-center mt-4 p-2">
+      <span class="highlight">None</span>
+      of your data is saved or used for any purpose.
     </p>
 
-    <p>
-      This website also features Facebook login for comparison.
-    </p>
-    <p class="bg-warning text-dark">
-      None of your data is saved or used for any purpose.
-    </p>
-    <p>
+    <p class="bg-white">
       The code source is available on <a href="https://github.com/simple-login/simplelogin-demo">SimpleLogin Demo
       Repository</a>.
     </p>
   </div>
 
-  <div class="row">
-    <div class="col text-center" style="width: 500px;">
-      <button class="btn btn-social btn-primary" onclick="simpleLogin()">
-        <i class="flaticon-021-shield-7"></i> Connect with SimpleLogin
-      </button>
-
-      <div v-if="sl_login">
-        <p class="text-success">Successful login! </p>
-        <p>Below is the information this website receives from SimpleLogin:</p>
-        Email: {{sl_user.email}} <br>
-        Name: {{sl_user.name}} <br>
-        Avatar: <img :src=sl_user.avatar_url>
+  <div v-if="authenticated">
+    <h1 class="text-white text-center">Your Info</h1>
+    <div class="card p-5">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img :src=user.avatar_url alt="" width="100" height="100" style="border-radius: 50%">
+        </div>
+        <div class="col-md-8 social-container my-2">
+          <p> Signed in via: {{ provider }} </p>
+          <p> Name: {{ user.name }} </p>
+          <p> Email: {{ user.email }}</p>
+        </div>
       </div>
-
-    </div>
-
-    <div class="col text-center" style="width: 500px;">
-      <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-           data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email"
-           onlogin="checkLoginState();">
+      <div class="row mx-auto mt-4">
+        <button v-on:click="logout()" class="btn btn-danger">
+          Logout
+        </button>
       </div>
-
-      <div v-if="fb_login">
-        <p class="text-success">Successful login! </p>
-        <p>Below is the information this website receives from Facebook:</p>
-        Email: {{fb_user.email}} <br>
-        Name: {{fb_user.name}} <br>
-        Avatar: <img :src=fb_user.avatar_url>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center">
-    <div v-if="!fb_login && !sl_login">
-      <img src="not-login.png" style="max-width: 400px; margin-top: 100px">
-    </div>
-
-    <div v-if="fb_login || sl_login" style="margin-top: 100px">
-      <h4 class="text-success">Congratulations! You now have access to this super secret information!</h4>
-      <img src="login.png" style="max-width: 400px; margin-top: 100px">
     </div>
   </div>
 </div>
+
 
 <!-- Facebook JS SDK -->
 <div id="fb-root"></div>

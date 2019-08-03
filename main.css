@@ -1,12 +1,41 @@
-body {
-    margin: 20px auto;
+img {
+    border: 3px solid #282c34;
 }
 
-.profile-picture {
-    /* make a square container */
-    width: 150px;
-    height: 150px;
-    /* round the edges to a circle with border radius 1/2 container size */
-    border-radius: 50%;
-    margin-top: 10px;
+.container-fluid {
+    height: 100vh;
+    background-color: #282c34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid > div {
+    width: 85%;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.card {
+    width: 100%;
+}
+
+.social-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn a, .btn a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.highlight {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transform: rotate(-5deg)
 }
