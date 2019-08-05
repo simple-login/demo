@@ -37,6 +37,13 @@
                   onclick="fbLogin()">
             <span class="fa fa-facebook"></span>Login with Facebook
           </button>
+
+          <button
+              v-if="googleSdkReady"
+              class="btn btn-social btn-block btn-google mb-4 mx-auto"
+              onclick="googleLogin()">
+            <span class="fa fa-google"></span>Login with Google
+          </button>
         </div>
       </div>
     </div>
@@ -85,6 +92,8 @@
   </div>
 </div>
 
+<!--Google JS SDK-->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- Facebook JS SDK -->
 <div id="fb-root"></div>

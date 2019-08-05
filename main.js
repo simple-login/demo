@@ -9,6 +9,7 @@ const app = new Vue({
       avatar_url: ""
     },
     provider: "",
+    googleSdkReady: false
   },
   methods: {
     logout: function () {
@@ -17,10 +18,15 @@ const app = new Vue({
         FB.logout(function (response) {
           location.href = "/";
         });
+      } else if (this.provider == "Google") {
+        gapi.auth2.getAuthInstance().signOut().then(
+          function (response) {
+            location.href = "/";
+          }
+        );
       } else {
         location.href = "/";
       }
-
     }
   }
 });
@@ -99,3 +105,40 @@ FB.getLoginStatus(function (response) {
 });
 
 /*** END Facebook ***/
+
+/*** Google ***/
+
+function googleLogin() {
+  gapi.auth2.getAuthInstance().signIn().then(
+    function (googleUser) {
+      var profile = googleUser.getBasicProfile();
+
+      app.authenticated = true;
+      app.provider = "Google";
+      app.user = {
+        email: profile.getEmail(),
+        name: profile.getName(),
+        avatar_url: profile.getImageUrl()
+      };
+    },
+    function (error) {
+      console.log(error);
+    }
+  );
+}
+
+
+function initGoogle() {
+  gapi.load('auth2', function () {
+    gapi.auth2.init({
+      client_id: '606630287997-3jlo7tlte0jktmavbv3rj0nav71fiec2.apps.googleusercontent.com'
+    }).then(function () {
+      console.log("Google Sdk finally ready");
+      app.googleSdkReady = true;
+    });
+  });
+}
+
+initGoogle();
+
+/*** End Google ***/
