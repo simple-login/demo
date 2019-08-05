@@ -16,16 +16,16 @@ const app = new Vue({
       this.authenticated = false;
       if (this.provider == "Facebook") {
         FB.logout(function (response) {
-          location.href = "/";
+          history.pushState({}, null, "/");
         });
       } else if (this.provider == "Google") {
         gapi.auth2.getAuthInstance().signOut().then(
           function (response) {
-            location.href = "/";
+            history.pushState({}, null, "/");
           }
         );
       } else {
-        location.href = "/";
+        history.pushState({}, null, "/");
       }
     }
   }
