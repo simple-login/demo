@@ -24,36 +24,41 @@ const app = new Vue({
             history.pushState({}, null, "/");
           }
         );
-      } else {
+      } else { // SimpleLogin
+        client.wipeTokens();
         history.pushState({}, null, "/");
       }
     }
   }
 });
 
-/*** SimpleLogin, using OIDC library ***/
-const providerInfo = OIDC.discover('https://app.simplelogin.io');
+/*** SimpleLogin, using JSO library ***/
 
-OIDC.setProviderInfo(providerInfo);
+// Make an authorization request if the user click the login button.
+function simpleLogin() {
+  client.getToken()
+    .then((token) => {
+      getUserData(token);
+    })
+}
 
-// OAuth2 client info. Please replace "client-id" here by your SimpleLogin OAuth2 client-id
-const clientInfo = {
-  client_id: 'client-id',
-  redirect_uri: location.href
-};
-OIDC.storeInfo(providerInfo, clientInfo);
+let client = new jso.JSO({
+  client_id: "client-id",
+  redirect_uri: location.href,
+  authorization: "https://app.simplelogin.io/oauth2/authorize",
+});
 
-OIDC.setClientInfo(clientInfo);
+// Handle redirection after user's approval
+client.callback();
 
-// Restore configuration information.
-OIDC.restoreInfo();
-
-// Get Access Token
-let token = OIDC.getAccessToken();
-
-// Make userinfo request using access_token.
+let token = client.checkToken();
 if (token !== null) {
-  fetch('https://app.simplelogin.io/oauth2/userinfo/?access_token=' + token)
+  if (token.access_token !== undefined)
+    getUserData(token);
+}
+
+function getUserData(token) {
+  fetch('https://app.simplelogin.io/oauth2/userinfo/?access_token=' + token.access_token)
     .then(response => response.json())
     .then(res => {
       app.authenticated = true;
@@ -64,14 +69,6 @@ if (token !== null) {
         avatar_url: res.avatar_url
       };
     })
-}
-
-// Make an authorization request if the user click the login button.
-function simpleLogin() {
-  OIDC.login({
-    scope: 'openid profile email',
-    response_type: 'id_token token'
-  });
 }
 
 /*** END SimpleLogin ***/
