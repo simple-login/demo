@@ -1,5 +1,5 @@
 This is an example of a typical website that implements SimpleLogin. 
-The code is deployed on https://simple-login-simplelogin-demo.glitch.me
+The code is deployed on https://simplelogin.now.sh/
 
 Feel free to **remix** it 
 on https://glitch.com/~simple-login-simplelogin-demo ✌️
