@@ -25,7 +25,6 @@ const app = new Vue({
           }
         );
       } else { // SimpleLogin
-        client.wipeTokens();
         history.pushState({}, null, "/");
       }
     }
@@ -35,40 +34,19 @@ const app = new Vue({
 /*** SimpleLogin, using JSO library ***/
 
 // Make an authorization request if the user click the login button.
+
+SL.init("demo");
+
 function simpleLogin() {
-  client.getToken()
-    .then((token) => {
-      getUserData(token);
-    })
-}
-
-let client = new jso.JSO({
-  client_id: "client-id",
-  redirect_uri: location.href,
-  authorization: "https://app.simplelogin.io/oauth2/authorize",
-});
-
-// Handle redirection after user's approval
-client.callback();
-
-let token = client.checkToken();
-if (token !== null) {
-  if (token.access_token !== undefined)
-    getUserData(token);
-}
-
-function getUserData(token) {
-  fetch('https://app.simplelogin.io/oauth2/userinfo/?access_token=' + token.access_token)
-    .then(response => response.json())
-    .then(res => {
-      app.authenticated = true;
+  SL.login(function(user){
+    app.authenticated = true;
       app.provider = "SimpleLogin";
       app.user = {
-        email: res.email,
-        name: res.name,
-        avatar_url: res.avatar_url
+        email: user.email,
+        name: user.name,
+        avatar_url: user.avatar_url
       };
-    })
+  });
 }
 
 /*** END SimpleLogin ***/
